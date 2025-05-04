@@ -10,7 +10,6 @@ export const Sidebar = () => {
             <div><NavLink to="/Dialog" className={m.item} >News</NavLink></div>
             <div><NavLink to="/Dialog" className={m.item}>Music</NavLink></div>
             <div><NavLink to="/Dialog" className={m.item}>Settings</NavLink></div>
-
         </nav>
     )
 }

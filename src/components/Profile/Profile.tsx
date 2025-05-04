@@ -1,13 +1,13 @@
-
 import {MyPosts} from "./MyPosts.tsx";
 import {ProfileInfo} from "./ProfileInfo.tsx";
 
 
-export const Profile = () => {
+
+export const Profile = (props:any) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts/>
+            <MyPosts allPosts={props.allPosts}/>
         </div>
 
 )

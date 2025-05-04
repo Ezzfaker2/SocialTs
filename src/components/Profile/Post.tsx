@@ -1,15 +1,9 @@
 import "./Post.css"
-export type TypeProps = {
-message: string;
-likes: string;
-}
+import {TypeAllPosts} from "../../Index.tsx";
 
 
 
-
-
-
-export const Post = (props: TypeProps) => {
+export const Post = (props: TypeAllPosts) => {
     return (
         <div className="post">
             <img
