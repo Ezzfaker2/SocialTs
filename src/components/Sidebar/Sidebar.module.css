@@ -1,0 +1,15 @@
+
+.item {
+    color: white;
+    text-decoration: none;
+}
+
+
+
+
+.sidebar {
+    background-color: green;
+    grid-area: s;
+}
+
+

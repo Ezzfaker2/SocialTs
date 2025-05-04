@@ -1,0 +1,11 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+
+}
+.dialog {
+    text-decoration: none;
+}
+.dialog_item {
+    text-decoration: none;
+}
