@@ -1,12 +1,35 @@
 import m from "./Header.module.css"
+import {NavLink} from "react-router-dom";
+import logo from "../../common/typescript.svg"
+import {isAuthSelector, loginSelector} from "../Redux/AllUsersSelector.ts";
+import {useDispatch, useSelector} from "react-redux";
+import {logoutThunk} from "../Redux/authReducer.ts";
 
 
 export const Header = () => {
+
+
+     const logOut = () => {
+         dispatch(logoutThunk())
+    }
+
+    const isAuth = useSelector(isAuthSelector)
+    const login = useSelector(loginSelector)
+    const dispatch = useDispatch()
+
+
+
+
+
+
     return (
         <header className={m.header}>
             <img
-                src="https://www.hollywoodreporter.com/wp-content/uploads/2012/12/img_logo_blue.jpg?w=1440&h=810&crop=1"
+                src={logo }
                 alt={"/"}/>
+            {isAuth ? login :
+            <NavLink to="/Login" style={{float:"left"}}>Login</NavLink>}
+            {!isAuth ?"": <button onClick={logOut}>Logout</button> }
         </header>
     )
 }

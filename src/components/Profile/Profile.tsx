@@ -1,14 +1,13 @@
-import {MyPosts} from "./MyPosts.tsx";
-import {ProfileInfo} from "./ProfileInfo.tsx";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo.tsx";
+import {MyPosts} from "./MyPosts/MyPosts.tsx";
+import {useAppSelector} from "../Redux/stateRedux.ts";
 
 
-
-export const Profile = (props:any) => {
+export const Profile = ({owner,profile,status,userUpdateStatusThunk,savePhoto,profileNew}) => {
     return (
         <div>
-            <ProfileInfo/>
-            <MyPosts allPosts={props.allPosts}/>
+            <ProfileInfo owner={owner} profile={profile}  status={status} userUpdateStatusThunk={userUpdateStatusThunk} savePhoto={savePhoto} profileNew={profileNew}/>
+            <MyPosts/>
         </div>
-
-)
+    )
 }

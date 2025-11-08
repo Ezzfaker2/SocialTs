@@ -1,52 +1,28 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
 import './index.css'
-import App from './App.tsx'
+import {Provider} from "react-redux";
+import {store} from "./components/Redux/stateRedux.ts";
+import {BrowserRouter} from "react-router";
+import {ComposeApp} from "./App.tsx";
+
+const container = document.getElementById('root')!;
+const root = createRoot(container);
 
 
-export type TypeUsersData = {
-    name:string
-    id: string
-}
-export type TypeUsersMessages = {
-    messages: string
-    id: string
-}
-export type TypeAllPosts = {
-    message: string
-    likes: string
-}
-export type propsType = {
-    usersData : TypeUsersData[]
-    usersMessages: TypeUsersMessages[]
-    allPosts: TypeAllPosts[]
-}
 
 
-const usersData:Array<TypeUsersData> = [
-    {name: "Dima", id: "1"},
-    {name: "Roma", id: "2"},
-    {name: "Danya", id: "3"}
-]
 
-const usersMessages:Array<TypeUsersMessages> = [
-    {messages: "Privet", id: "1"},
-    {messages: "Ku", id: "2"},
-    {messages: "Yo", id: "3"}
-]
-
-const allPosts:Array<TypeAllPosts> = [
-    {message: "hi, sup", likes: "12"},
-    {message: "hi, sup", likes: "13"},
-    {message: "hi, sup", likes: "14"},
-    {message: "hi, sup", likes: "15"}
-]
-
-createRoot(document.getElementById('root')!).render(
-    <StrictMode>
-        <App usersData={usersData} usersMessages={usersMessages} allPosts={allPosts}/>
-    </StrictMode>,
-)
-
-
+export const rerenderEntireTree = (store: any) => {
+    root.render(
+        <BrowserRouter>
+            <StrictMode>
+                <Provider store={store}>
+                    <ComposeApp/>
+                </Provider>
+            </StrictMode>
+        </BrowserRouter>
+    );
+};
+rerenderEntireTree(store)
 

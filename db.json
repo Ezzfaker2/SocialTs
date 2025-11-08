@@ -1,0 +1,28 @@
+{
+  "posts": [
+    { "id": "1", "title": "a title", "views": 100 },
+    { "id": "2", "title": "another title", "body": 200 },
+    { "id": "3", "title": "another title", "body": 200 },
+    { "id": "4", "title": "another title", "body": 200 },
+    { "id": "5", "title": "another title", "body": 200 },
+    { "id": "6", "title": "another title", "body": 200 },
+    { "id": "7", "title": "another title", "body": 200 },
+    { "id": "8", "title": "another title", "body": 200 },
+    { "id": "9", "title": "another title", "body": 200 },
+    { "id": "10", "title": "another title", "body": 200 },
+    { "id": "11", "title": "another title", "body": 200 },
+    { "id": "12", "title": "another title", "body": 200 },
+    { "id": "13", "title": "another title", "body": 200 },
+    { "id": "123", "title": "another title", "body": 200 },
+    { "id": "2123", "title": "another title", "body": 200 },
+    { "id": "2123124", "title": "another title", "body": 20},
+    { "id": "2123", "title": "another title", "body": 200 }
+  ],
+  "comments": [
+    { "id": "1", "text": "a comment about post 1", "postId": "1" },
+    { "id": "2", "text": "another comment about post 1", "postId": "1" }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

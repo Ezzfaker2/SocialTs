@@ -1,9 +1,6 @@
 import "./Post.css"
-import {TypeAllPosts} from "../../Index.tsx";
 
-
-
-export const Post = (props: TypeAllPosts) => {
+export const Post = (props) => {
     return (
         <div className="post">
             <img

@@ -1,4 +1,4 @@
-import {NavLink} from "react-router";
+import {NavLink} from "react-router-dom";
 
 export type UserPropsType = {
     name: string,
