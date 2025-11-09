@@ -1,14 +1,10 @@
-import {
-    profileAPI, usersAPI,
-} from "../Api/Api.ts";
-import {allPostsType,  profileType} from "../../Types/Types.ts";
+import {profileAPI, usersAPI,} from "../Api/Api.ts";
+import {allPostsType, profileType} from "../../Types/Types.ts";
 import {baseThunkType, inferActionsTypes} from "./stateRedux.ts";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 
-
-
-export type allActionTypes = inferActionsTypes<typeof actions>
+export type allActionTypes = inferActionsTypes<typeof profileReducer.actions>
 export type AllThunkActionTypes = baseThunkType<allActionTypes>
 export type initialStateType = typeof initialState
 
@@ -55,8 +51,7 @@ export const profileReducer = createSlice({
 
 export const {successPhoto,
     setUserStatus,
-    setUserProfile,
-    addPost} = profileReducer.actions;
+    setUserProfile, addPost} = profileReducer.actions;
 export const profileReducerSelector = profileReducer.reducer
 
 
@@ -74,7 +69,12 @@ export const userProfileThunk = createAsyncThunk(
             thunkAPI.dispatch(setUserProfile(response))
 
         } catch (e) {
-            return thunkAPI.rejectWithValue(e.message)
+            if (typeof e === "string") {
+                return e
+            } else if (e instanceof Error) {
+                return thunkAPI.rejectWithValue(e.message)
+            }
+            return thunkAPI.rejectWithValue("Unknown error")
 
         }
 
@@ -88,7 +88,12 @@ export const userStatusThunk = createAsyncThunk(
             const response = await usersAPI.userStatus(userId)
             thunkAPI.dispatch(setUserStatus(response.data))
         } catch (e) {
-            return thunkAPI.rejectWithValue(e.message)
+            if (typeof e === "string") {
+                return e
+            } else if (e instanceof Error) {
+                return thunkAPI.rejectWithValue(e.message)
+            }
+            return thunkAPI.rejectWithValue("Unknown error")
         }
     }
 )
@@ -100,7 +105,12 @@ export const userUpdateStatusThunk = createAsyncThunk(
           const response = await usersAPI.userUpdateStatus(status)
               thunkAPI.dispatch(setUserStatus(status))
         } catch (e) {
-            return thunkAPI.rejectWithValue(e.message)
+            if (typeof e === "string") {
+                return e
+            } else if (e instanceof Error) {
+                return thunkAPI.rejectWithValue(e.message)
+            }
+            return thunkAPI.rejectWithValue("Unknown error")
         }
     })
 
@@ -111,7 +121,12 @@ export const savePhoto = createAsyncThunk(
             const response = await profileAPI.SavePhoto(file)
             thunkAPI.dispatch(successPhoto(file))
         } catch (e) {
-            return thunkAPI.rejectWithValue(e.message)
+            if (typeof e === "string") {
+                return e
+            } else if (e instanceof Error) {
+                return thunkAPI.rejectWithValue(e.message)
+            }
+            return thunkAPI.rejectWithValue("Unknown error")
         }
     })
 export const profileNew = createAsyncThunk(
@@ -121,7 +136,12 @@ export const profileNew = createAsyncThunk(
            const response = await profileAPI.updateProfileInfo(profile)
 
         } catch (e) {
-            thunkAPI.rejectWithValue(e.message)
+            if (typeof e === "string") {
+                return e
+            } else if (e instanceof Error) {
+                return thunkAPI.rejectWithValue(e.message)
+            }
+            return thunkAPI.rejectWithValue("Unknown error")
         }
     }
     )

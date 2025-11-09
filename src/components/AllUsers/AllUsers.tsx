@@ -1,37 +1,30 @@
 import styles from "./Allusers.module.css";
-
-import React, { useEffect } from "react";
-import {
-    currentPageSelector,
-    filterSelector,
-    followingProgressSelector,
-    getAllUsersSelector,
-    pageSizeSelector,
-    totalUsersCountSelector
-} from "../Redux/AllUsersSelector.ts";
-import { useDispatch, useSelector } from "react-redux";
-import { dispatchType, followThunk, getAllUsersThunk, unfollowThunk } from "../Redux/AllUsersReducer.ts";
-import { AllUsersSearch } from "./AllUsersSearch.tsx";
-import {useLocation, useNavigate, useSearchParams} from "react-router";
-import {NavLink} from "react-router-dom";
-
-
+import * as selectors from "../Redux/allUsersSelector/index.ts"
+import React, {useEffect} from "react";
+import {followThunk, getAllUsersThunk, unfollowThunk} from "../Redux/AllUsersReducer.ts";
+import {AllUsersSearch} from "./AllUsersSearch.tsx";
+import {NavLink, useNavigate, useSearchParams} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../Redux/stateRedux.ts";
 
 
 export const AllUsers: React.FC = () => {
-    const totalUsersCount = useSelector(totalUsersCountSelector);
-    const pageSize = useSelector(pageSizeSelector);
-    const currentPage = useSelector(currentPageSelector);
-    const allUsers = useSelector(getAllUsersSelector);
-    const followingProgress = useSelector(followingProgressSelector);
-    const filter = useSelector(filterSelector);
-    const dispatch = useDispatch<dispatchType>();
+
+    const [searchParams] = useSearchParams();
+
+    const totalUsersCount = useAppSelector(selectors.totalUsersCountSelector);
+    const pageSize = useAppSelector(selectors.pageSizeSelector);
+    const currentPage = useAppSelector(selectors.currentPageSelector);
+    const allUsers = useAppSelector(selectors.getAllUsersSelector);
+    const followingProgress = useAppSelector(selectors.followingProgressSelector);
+    const filter = useAppSelector(selectors.filterSelector);
+
+    const dispatch = useAppDispatch();
 
     const navigate = useNavigate();
-    const location = useLocation();
-    const [searchParams, setSearchParams] = useSearchParams();
 
-    // Обновление URL при изменении фильтра или страницы
+
+
+
     useEffect(() => {
         const newSearchParams = new URLSearchParams();
         if (filter.term) newSearchParams.set('term', filter.term);
@@ -41,18 +34,17 @@ export const AllUsers: React.FC = () => {
         navigate({
             pathname: "/users",
             search: newSearchParams.toString(),
-        }, { replace: true }); // replace: true для замены истории, а не добавления
+        }, { replace: true });
     }, [filter, currentPage, navigate]);
 
-    // Инициализация при монтировании (парсинг URL и загрузка данных)
+
     useEffect(() => {
         const term = searchParams.get('term') || '';
         const friend = searchParams.get('friend') === 'true' ? true : searchParams.get('friend') === 'false' ? false : null;
         const page = parseInt(searchParams.get('page') || '1', 10);
-
         const parsedFilter = { term, friend };
         dispatch(getAllUsersThunk({ pageNumber: page, pageSize, filter: parsedFilter }));
-    }, [searchParams, dispatch, pageSize]); // Зависимости: searchParams для триггера при изменении URL
+    }, [searchParams, dispatch, pageSize]);
 
     const onPageChange = (pageNumber: number) => {
         dispatch(getAllUsersThunk({ pageNumber, pageSize, filter }));

@@ -1,6 +1,5 @@
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo.tsx";
 import {MyPosts} from "./MyPosts/MyPosts.tsx";
-import {useAppSelector} from "../Redux/stateRedux.ts";
 
 
 export const Profile = ({owner,profile,status,userUpdateStatusThunk,savePhoto,profileNew}) => {

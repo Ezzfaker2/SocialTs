@@ -1,6 +1,6 @@
-import {AppStateType} from "./stateRedux.ts";
+import {AppStateType} from "../stateRedux.ts";
 export const getAllUsersSelector = (state:AppStateType) => {
-    return state.allUsersPage.allUsers
+    return state.allUsersPage.allUsers;
 }
 export const pageSizeSelector = (state:AppStateType) => {
     return state.allUsersPage.pageSize

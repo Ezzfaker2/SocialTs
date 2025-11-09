@@ -1,7 +1,7 @@
 import m from "./Header.module.css"
 import {NavLink} from "react-router-dom";
-import logo from "../../common/typescript.svg"
-import {isAuthSelector, loginSelector} from "../Redux/AllUsersSelector.ts";
+import logo from "../../../public/assets/typescript.svg"
+import {isAuthSelector, loginSelector} from "../Redux/allUsersSelector/AllUsersSelector.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutThunk} from "../Redux/authReducer.ts";
 

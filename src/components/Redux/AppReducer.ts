@@ -1,10 +1,5 @@
 import {authThunk} from "./authReducer.ts";
-import {inferActionsTypes} from "./stateRedux.ts";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-
-
-type actionsType = inferActionsTypes<typeof actions>
-export type initialStateType = typeof initialState
 
 
 export const initialState = {
@@ -28,13 +23,21 @@ export const AppReducerState = AppReducer.reducer
 
 export const InitializeThunk = createAsyncThunk(
     "AppReducer/InitializeThunk",
-    async (_, thunkAPI) => {
+    async (_, {dispatch, rejectWithValue}) => {
         try {
-            let dispatchResoult = thunkAPI.dispatch(authThunk())
-            await Promise.all([dispatchResoult])
-            thunkAPI.dispatch(initializedAuthData())
+            let dispatchResalt = dispatch(authThunk())
+            await Promise.all([dispatchResalt])
+            dispatch(initializedAuthData())
         } catch (e) {
-            return thunkAPI.rejectWithValue(e.message)
+            if (typeof e === "string") {
+                return e
+            } else if ( e instanceof(Error)) {
+                return rejectWithValue(e)
+            }
+            return rejectWithValue("Unknown error")
+
+
+
         }
     }
 )

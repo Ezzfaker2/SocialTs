@@ -1,4 +1,5 @@
-import preloader from "../common/bouncing-circles.svg";
+// @ts-ignore
+import preloader from "/public/assets/bouncing-circles.svg"
 
 
 export const Preloader = () => {

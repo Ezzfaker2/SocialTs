@@ -5,10 +5,11 @@ import {usersAPI} from "../Api/Api.ts";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 
-type allActionType = inferActionsTypes<typeof actions>
-export type initialStateType = typeof initialState;
-export type dispatchType = Dispatch<allActionType>
+type allActionType = inferActionsTypes<typeof allUsersReducer.actions>
+type initialStateType = typeof initialState;
+type dispatchType = Dispatch<allActionType>
 type thunkType = baseThunkType<allActionType>
+
 
 export const initialState = {
     allUsers: [] as Array<allUsersType>,
@@ -28,8 +29,9 @@ export const allUsersReducer = createSlice({
     initialState,
     reducers: {
         follow(state, action) {
-            state.allUsers.map(i => {
-                if (i.id === action.payload) {
+            const userId = action.payload
+            state.allUsers.map((i) => {
+                if (i.id === userId) {
                     i.followed = true
                 }
             })
@@ -80,16 +82,19 @@ export const UsersReducer = allUsersReducer.reducer
 
 export const getAllUsersThunk = createAsyncThunk(
     "allUsers/getAllUsersThunk",
-    async ({currentPage, pageSize, filter}, {dispatch, rejectWithValue}) => {
+    async ({currentPage, pageSize, filter}: initialStateType, {dispatch, rejectWithValue}) => {
         try {
             dispatch(preloaderFetching(true))
             dispatch(setFilter(filter))
             let response = await usersAPI.getUsers(currentPage, pageSize, filter.term, filter.friend);
             dispatch(preloaderFetching(false))
             dispatch(setUser(response.items))
-
         } catch (e) {
-            return rejectWithValue(e.message)
+            if ( typeof e === "string") {
+              return  e
+            } else {
+                return rejectWithValue(e)
+            }
         }
     }
 )

@@ -5,7 +5,7 @@ import {DialogForm} from "./DialogForm.tsx";
 
 
 import {useDispatch, useSelector} from "react-redux";
-import {dialogPageSelector} from "../Redux/AllUsersSelector.ts";
+import {dialogPageSelector} from "../Redux/allUsersSelector/AllUsersSelector.ts";
 import {postNewMessageBodyAC} from "../Redux/DialogReducer.ts";
 
 
@@ -28,6 +28,7 @@ import {postNewMessageBodyAC} from "../Redux/DialogReducer.ts";
     const finishUsersMessages = dialogPage.usersMessages.map((m: any) => <Messages messages={m.messages} id={m.id} key={m.id}/>)
 
     return (
+        <>
             <div className="dialogs">
                 <div className="dialog">
                     {finishUsersData}
@@ -35,10 +36,12 @@ import {postNewMessageBodyAC} from "../Redux/DialogReducer.ts";
                 <div>
                     <div>{finishUsersMessages}</div>
                     <div>
-                       <DialogForm sendMessage={sendMessage}/>
+                        <DialogForm sendMessage={sendMessage}/>
                     </div>
                 </div>
             </div>
+
+        </>
     )
 }
 

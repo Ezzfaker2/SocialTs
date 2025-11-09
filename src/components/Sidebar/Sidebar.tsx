@@ -1,18 +1,18 @@
-import m from "./Sidebar.module.css"
+import style from "./Sidebar.module.css"
 import {NavLink} from "react-router-dom";
 
 
 
 export const Sidebar = () => {
     return (
-        <nav className={m.sidebar}>
-            <div><NavLink to="/Profile" className={m.item}>Profile</NavLink></div>
-            <div><NavLink to="/Dialog" className={m.item}>Message</NavLink></div>
-            <div><NavLink to="/Dialog" className={m.item}>News</NavLink></div>
-            <div><NavLink to="/Dialog" className={m.item}>Music</NavLink></div>
-            <div><NavLink to="/Dialog" className={m.item}>Settings</NavLink></div>
-            <div><NavLink to="/Users" className={m.item}>All Users</NavLink></div>
-            <div><NavLink to="/Chatpage" className={m.item}>Chat Page</NavLink></div>
+        <nav className={style.sidebar}>
+            <NavLink to="/Profile" className={style.item}>Profile</NavLink>
+            <NavLink to="/Dialog" className={style.item}>Message</NavLink>
+            <NavLink to="/Dialog" className={style.item}>News</NavLink>
+            <NavLink to="/Dialog" className={style.item}>Music</NavLink>
+            <NavLink to="/Dialog" className={style.item}>Settings</NavLink>
+            <NavLink to="/Users" className={style.item}>All Users</NavLink>
+            <NavLink to="/Chatpage" className={style.item}>Chat Page</NavLink>
         </nav>
     )
 }

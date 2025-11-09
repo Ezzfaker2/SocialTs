@@ -1,5 +1,5 @@
 import axios from "axios";
-import {allUsersType, profileType} from "../../Types/Types.ts";
+import {allUsersType, fetchingUsersType, profileType} from "../../Types/Types.ts";
 
 export const instance = axios.create({
     withCredentials: true,
@@ -36,12 +36,12 @@ type responseType<D = {}> = {
 
 
 export const usersAPI = {
-    getUsers: (currentPage: number, pageSize: number, term: string = "", friend: null | boolean = null ) => {
-        return instance.get<allUsersType>(`users?page=${currentPage}&count=${pageSize}&term=${term} ` + (friend === null ? "" : `&friend=${friend}`))
+    getUsers: (currentPage, pageSize, term, friend ) => {
+        return instance.get<fetchingUsersType>(`users?page=${currentPage}&count=${pageSize}&term=${term} ` + (friend === null ? "" : `&friend=${friend}`))
             .then(response => response.data)
     },
-    userProfile: (userId: number) => {
-        return instance.get<profileType>(`profile/${userId}`).then(response => response.data);
+    userProfile: async(userId: number) => {
+        return  await instance.get<profileType>(`profile/${userId}`).then(response => response.data);
     },
     follow: (userId: number) => {
         return instance.post<responseType<followType>>(`follow/${userId}`).then(response => response.data);

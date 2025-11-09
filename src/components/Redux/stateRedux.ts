@@ -25,9 +25,8 @@ export const store = configureStore({
 // @ts-ignore
 window.store = store;
 type rootReducerType = typeof rootReducer;
-export type AppStateType = ReturnType<rootReducerType>; // ts по умному возвращает типы для редусеров
-export type storeType = ReturnType<typeof store>
-export type AppDispatch = storeType['dispatch'];
+export type AppStateType = ReturnType<rootReducerType>;
+export type AppDispatch = typeof store.dispatch
 
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();

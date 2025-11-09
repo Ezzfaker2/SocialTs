@@ -1,5 +1,5 @@
 import m from "../Profile.module.css"
-import photo from "../../../common/1-intro-photo-final.jpg"
+import photo from "../../../../public/assets/1-intro-photo-final.jpg"
 import {ProfileStatusFunctional} from "./profileStatusFunctional.tsx";
 import {Preloader} from "../../../Preloader/Preloader.tsx";
 import {useState} from "react";

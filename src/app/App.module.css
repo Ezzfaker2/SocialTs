@@ -3,7 +3,7 @@
     grid-template-columns: 1fr 9fr;
     grid-template-rows: 60px 1fr  ;
     grid-template-areas: "h h" "s m";
-    width: 2500px;
+    width: auto;
     margin: 0 auto;
 }
 

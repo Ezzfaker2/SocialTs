@@ -1,6 +1,6 @@
 import {useSelector} from "react-redux";
 import {Preloader} from "../../Preloader/Preloader.tsx";
-import {preloaderFetchingSelector} from "../Redux/AllUsersSelector.ts";
+import {preloaderFetchingSelector} from "../Redux/allUsersSelector/AllUsersSelector.ts";
 import {AllUsers} from "./AllUsers.tsx";
 
 

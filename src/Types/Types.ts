@@ -28,10 +28,20 @@ export type profileType = {
 }
 
 export type allUsersType = {
-    items: Array<usersType>
+    id: number;
+    name: string;
+    status: string;
+    photos: photosType
+    followed: boolean;
     totalCount: number
     error: string | null
 
+
+}
+export type fetchingUsersType = {
+    items: Array<usersType>
+    totalCount: number
+    error: string | null
 
 }
 
